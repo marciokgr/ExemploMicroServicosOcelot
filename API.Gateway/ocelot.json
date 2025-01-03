@@ -1,0 +1,32 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/WeatherForecast", // rota privada
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost", // host da API de pagamentos
+          "Port": 5216 // porta da API de pagamentos
+        }
+      ],
+      "UpstreamPathTemplate": "/pagamentos/weather", // rota pública
+      "UpstreamHttpMethod": [ "Get" ],
+      "SwaggerKey": "pagamentos" //chave do swagger
+    }
+  ],
+  "SwaggerEndPoints": [ //configuração do swagger da API filha
+    {
+      "Key": "pagamentos",
+      "Config": [
+        {
+          "Name": "pagamentos API",
+          "Version": "v1",
+          "Url": "http://localhost:5216/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}
